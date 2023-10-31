@@ -15,7 +15,7 @@ const CadastroServico = () => {
     const [duracao, setDuracao] = useState<string>("");
     const [preco, setPreco] = useState<string>("");
 
-    const CadastroServico= (e: FormEvent) => {
+    const cadastrar= (e: FormEvent) => {
         e.preventDefault();
 
         const dados = {
@@ -25,7 +25,7 @@ const CadastroServico = () => {
             preco: preco
         }
         console.log(dados)
-        axios.post('http://127.0.0.1:8000/api/store1',
+        axios.post('http://127.0.0.1:8000/api/servico/store1',
             dados,
             {
                 headers: {
@@ -33,7 +33,7 @@ const CadastroServico = () => {
                     "Content-Type": "application/json"
                 }
             }).then(function (response) {
-                window.location.href = "/listagem"
+                window.location.href = "/listagemServico"
             }).catch(function (error) {
                 console.log(error);
                 console.log(dados);
@@ -49,10 +49,10 @@ const CadastroServico = () => {
             setDescricao(e.target.value);
         }
         if (e.target.name === "duracao") {
-            setDuracao(e.target as any);
+            setDuracao(e.target.value);
         }
         if (e.target.name === "preco") {
-            setPreco(e.target as any);
+            setPreco(e.target.value);
         }
 
     }
@@ -66,7 +66,7 @@ const CadastroServico = () => {
                     <div className='card'>
                         <div className='card-body'>
                             <h5 className='card-title'> Cadastrar Servico</h5>
-                            <form onSubmit={CadastroServico} className='row g-3'>
+                            <form onSubmit={cadastrar} className='row g-3'>
                                 <div className='col-6'>
                                     <label htmlFor="nome" className='form-label'>Nome</label>
                                     <input type="text"

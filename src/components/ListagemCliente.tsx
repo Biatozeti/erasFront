@@ -22,8 +22,8 @@ const ListagemCliente = () => {
         async function fetchData(){
 
             try{
-                const response = await axios.post('http://10.137.9.131:8000/api/findNome',
-                {nome:pesquisa},
+                const response = await axios.post('http://127.0.0.1:8000/api/cliente/nome2',
+                {pesquisarPorNome2:pesquisa},
                 {
 
                 headers:{
@@ -31,7 +31,14 @@ const ListagemCliente = () => {
                     "content-Type":"aplication/json"
                 }
                }).then(function(response){
-                setCliente(response.data.data);
+                if( response.data.status === true){
+                    setCliente(response.data.data);
+                }
+                else{
+                    setCliente([]);
+                }
+                        
+               
                }).catch(function(error){
                 console.log(error);
                });
@@ -45,7 +52,7 @@ const ListagemCliente = () => {
     useEffect(() =>{
         async function fetchData(){
             try{
-                const response = await axios.get('http://10.137.9.131:8000/api/find');
+                const response = await axios.get('http://127.0.0.1:8000/api/cliente/retornarTodes');
                 setCliente(response.data.data);
                
 

@@ -11,24 +11,24 @@ import axios from 'axios';
 const CadastroCliente = () => {
 
     const [nome, setNome] = useState<string>("");
-    const [celular, setCelular] = useState<number>();
+    const [celular, setCelular] = useState<string>();
     const [email, setEmail] = useState<string>("");
-    const [cpf, setCpf] = useState<number>();
+    const [cpf, setCpf] = useState<string>();
     const [dataNascimento, setdataNascimento] = useState<string>("");
     const [cidade, setCidade] = useState<string>("");
     const [estado, setEstado] = useState<string>("");
     const [pais, setPais] = useState<string>("");
     const [rua, setRua] = useState<string>("");
-    const [numero, setNumero] = useState<number>();
+    const [numero, setNumero] = useState<string>();
     const [bairro, setBairro] = useState<string>("");
-    const [cep, setCep] = useState<number>();
+    const [cep, setCep] = useState<string>();
     const [complemento, setComplemento] = useState<string>("");
-    const [senha, setSenha] = useState<number>();
+    const [senha, setSenha] = useState<string>();
     
 
 
 
-    const CadastroCliente= (e: FormEvent) => {
+    const cadastrar= (e: FormEvent) => {
         e.preventDefault();
 
         const dados = {
@@ -50,7 +50,7 @@ const CadastroCliente = () => {
 
         }
         console.log(dados)
-        axios.post('http://10.137.9.131:8000/api/store',
+        axios.post('http://127.0.0.1:8000/api/cliente/store2',
             dados,
             {
                 headers: {
@@ -58,7 +58,7 @@ const CadastroCliente = () => {
                     "Content-Type": "application/json"
                 }
             }).then(function (response) {
-                window.location.href = "/listagem"
+                window.location.href = "/listagemCliente"
             }).catch(function (error) {
                 console.log(error);
                 console.log(dados);
@@ -71,17 +71,17 @@ const CadastroCliente = () => {
             setNome(e.target.value);
         }
         if (e.target.name === "celular") {
-            setCelular(e.target as any);
+            setCelular(e.target.value);
         }
         if (e.target.name === "email") {
             setEmail(e.target.value);
         }
         if (e.target.name === "cpf") {
-            setCpf(e.target as any);
+            setCpf(e.target.value);
         }
     
          if (e.target.name === "dataNascimento") {
-        setdataNascimento(e.target as any);
+        setdataNascimento(e.target.value);
        }
        if (e.target.name === "cidade") {
         setCidade(e.target.value);
@@ -96,25 +96,22 @@ const CadastroCliente = () => {
         setRua(e.target.value);
        }
        if (e.target.name === "numero") {
-        setNumero(e.target as any);
+        setNumero(e.target.value);
        }
        if (e.target.name === "bairro") {
         setBairro(e.target.value);
        }
        if (e.target.name === "cep") {
-        setCep(e.target as any);
+        setCep(e.target.value);
        }
        if (e.target.name === "complemento") {
         setComplemento(e.target.value);
        }
        if (e.target.name === "senha") {
-        setSenha(e.target as any);
-
-
-
+        setSenha(e.target.value);
     }
 
-
+    }
     return (
         <div>
             <Header />
@@ -123,7 +120,7 @@ const CadastroCliente = () => {
                     <div className='card'>
                         <div className='card-body'>
                             <h5 className='card-title'> Cadastrar Servico</h5>
-                            <form onSubmit={CadastroCliente} className='row g-3'>
+                            <form onSubmit={cadastrar} className='row g-3'>
                                 <div className='col-6'>
                                     <label htmlFor="nome" className='form-label'>Nome</label>
                                     <input type="text"
@@ -271,7 +268,7 @@ const CadastroCliente = () => {
         </div>
     );
 }
-}
+
 
 export default CadastroCliente;
  

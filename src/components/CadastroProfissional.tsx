@@ -14,7 +14,7 @@ const CadastroProfissional = () => {
     const [celular, setCelular] = useState<number>();
     const [email, setEmail] = useState<string>("");
     const [cpf, setCpf] = useState<number>();
-    const [dataNascimento, setdataNascimento] = useState<string>("");
+    const [dataNascimento, setDataNascimento] = useState<string>("");
     const [cidade, setCidade] = useState<string>("");
     const [estado, setEstado] = useState<string>("");
     const [pais, setPais] = useState<string>("");
@@ -26,11 +26,11 @@ const CadastroProfissional = () => {
     const [senha, setSenha] = useState<number>();
     const [salario, setSalario] = useState<number>();
 
-    
 
 
 
-    const CadastroProfissional= (e: FormEvent) => {
+
+    const cadastrar = (e: FormEvent) => {
         e.preventDefault();
 
         const dados = {
@@ -48,8 +48,8 @@ const CadastroProfissional = () => {
             cep: cep,
             complemento: complemento,
             senha: senha,
-            salario : salario
-            
+            salario: salario
+
 
         }
         console.log(dados)
@@ -82,42 +82,43 @@ const CadastroProfissional = () => {
         if (e.target.name === "cpf") {
             setCpf(e.target as any);
         }
-    
-         if (e.target.name === "dataNascimento") {
-        setdataNascimento(e.target as any);
-       }
-       if (e.target.name === "cidade") {
-        setCidade(e.target.value);
-       }
-       if (e.target.name === "estado") {
-        setEstado(e.target.value);
-       }
-       if (e.target.name === "pais") {
-        setPais(e.target.value);
-       }
-       if (e.target.name === "rua") {
-        setRua(e.target.value);
-       }
-       if (e.target.name === "numero") {
-        setNumero(e.target as any);
-       }
-       if (e.target.name === "bairro") {
-        setBairro(e.target.value);
-       }
-       if (e.target.name === "cep") {
-        setCep(e.target as any);
-       }
-       if (e.target.name === "complemento") {
-        setComplemento(e.target.value);
-       }
-       if (e.target.name === "senha") {
-        setSenha(e.target as any);
-       }
-    
-    if (e.target.name === "salario") {
-     setSalario(e.target as any);
-    }
 
+        if (e.target.name === "dataNascimento") {
+            setDataNascimento(e.target as any);
+        }
+        if (e.target.name === "cidade") {
+            setCidade(e.target.value);
+        }
+        if (e.target.name === "estado") {
+            setEstado(e.target.value);
+        }
+        if (e.target.name === "pais") {
+            setPais(e.target.value);
+        }
+        if (e.target.name === "rua") {
+            setRua(e.target.value);
+        }
+        if (e.target.name === "numero") {
+            setNumero(e.target as any);
+        }
+        if (e.target.name === "bairro") {
+            setBairro(e.target.value);
+        }
+        if (e.target.name === "cep") {
+            setCep(e.target as any);
+        }
+        if (e.target.name === "complemento") {
+            setComplemento(e.target.value);
+        }
+        if (e.target.name === "senha") {
+            setSenha(e.target as any);
+        }
+
+        if (e.target.name === "salario") {
+            setSalario(e.target as any);
+        }
+
+    }
 
     return (
         <div>
@@ -162,7 +163,7 @@ const CadastroProfissional = () => {
                                         onChange={handleState}
                                         required
                                     />
-                                    
+
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="cidade" className='form-label'>Cidade</label>
@@ -173,7 +174,7 @@ const CadastroProfissional = () => {
                                         required
                                     />
 
-                                    
+
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="estado" className='form-label'>Estado</label>
@@ -183,7 +184,7 @@ const CadastroProfissional = () => {
                                         onChange={handleState}
                                         required
                                     />
-                                    
+
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="pais" className='form-label'>Pais</label>
@@ -193,7 +194,7 @@ const CadastroProfissional = () => {
                                         onChange={handleState}
                                         required
                                     />
-                                    
+
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="rua" className='form-label'>Rua</label>
@@ -204,7 +205,7 @@ const CadastroProfissional = () => {
                                         required
                                     />
 
-                                    
+
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="numero" className='form-label'>Numero</label>
@@ -214,7 +215,7 @@ const CadastroProfissional = () => {
                                         onChange={handleState}
                                         required
                                     />
-                                    
+
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="bairro" className='form-label'>Bairro</label>
@@ -224,7 +225,7 @@ const CadastroProfissional = () => {
                                         onChange={handleState}
                                         required
                                     />
-                                    
+
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="cep" className='form-label'>Cep</label>
@@ -234,7 +235,7 @@ const CadastroProfissional = () => {
                                         onChange={handleState}
                                         required
                                     />
-                                    
+
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="complemento" className='form-label'>Complemento</label>
@@ -244,7 +245,7 @@ const CadastroProfissional = () => {
                                         onChange={handleState}
                                         required
                                     />
-                                    
+
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="senha" className='form-label'>Senha</label>
@@ -255,7 +256,7 @@ const CadastroProfissional = () => {
                                         required
                                     />
 
-</div>
+                                </div>
                                 <div className='col-6'>
                                     <label htmlFor="salario" className='form-label'>Salario</label>
                                     <input type="salario"
@@ -285,7 +286,6 @@ const CadastroProfissional = () => {
         </div>
     );
 }
-}
+
 
 export default CadastroProfissional;
- 

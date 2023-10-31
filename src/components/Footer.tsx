@@ -7,7 +7,7 @@ const Footer = () =>{
         <footer className={styles.footer}>
 
 <p>
-     <span>Buscador de Cep</span> @SENAI
+     <span>Cadastro</span> @ERAShair
             </p>  
         </footer>
            

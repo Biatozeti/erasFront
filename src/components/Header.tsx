@@ -6,7 +6,7 @@ import styles from "./Header.module.css"
 const Header = () => {
  return (
     <header className={styles.header}>
-          <h1>Buscador de Cep</h1> 
+          <h1>Cadastro ERAShair</h1> 
     </header>
  );
 }

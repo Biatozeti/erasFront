@@ -1,16 +1,16 @@
 import React, {Component, useState, ChangeEvent, FormEvent, useEffect}from 'react';
 import styles from "../App.module.css"
-import { CadastroInterface } from '../Interfaces/CadastroServicoInterface';
+import { CadastroServicoInterface } from '../Interfaces/CadastroServicoInterface';
 import axios from 'axios';
 
 const ListagemServico = () => {
 
-    const [usuarios, setServico] = useState<CadastroInterface[]>([]);
+    const [usuarios, setServico] = useState<CadastroServicoInterface[]>([]);
     const [pesquisa, setPesquisa] = useState<string>('');
     const [error, setError] = useState("");
 
     const handleState = (e: ChangeEvent<HTMLInputElement>)=>{
-        if(e.target.name === "pesquisa"){
+        if(e.target.name === "pesquisaPorNome1"){
             setPesquisa(e.target.value);
         }
 
@@ -22,7 +22,7 @@ const ListagemServico = () => {
         async function fetchData(){
 
             try{
-                const response = await axios.post('http://127.0.0.1:8000/api/nome',
+                const response = await axios.post('http://127.0.0.1:8000/api/servico/nome',
                 {nome:pesquisa},
                 {
 
@@ -31,6 +31,7 @@ const ListagemServico = () => {
                     "content-Type":"aplication/json"
                 }
                }).then(function(response){
+                console.log(response.data)
                 setServico(response.data.data);
                }).catch(function(error){
                 console.log(error);
@@ -45,7 +46,7 @@ const ListagemServico = () => {
     useEffect(() =>{
         async function fetchData(){
             try{
-                const response = await axios.get('http://127.0.0.1:8000/api/servico/retornarTodes/');
+                const response = await axios.get('http://127.0.0.1:8000/api/servico/retornarTodes');
                 setServico(response.data.data);
                
 
@@ -70,7 +71,7 @@ const ListagemServico = () => {
                                 <h5 className='card-title'>Pesquisar</h5>
                                 <form onSubmit={buscar} className="row"  >
                                     <div className='col-10'>
-                                        <input type="text" name='pesquisa'
+                                        <input type="text" name='pesquisaPorNome1'
                                         className='form-control' onChange={handleState}/>
                                     </div>
                                     <div className='col-1'>
