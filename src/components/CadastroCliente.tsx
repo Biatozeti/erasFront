@@ -57,11 +57,18 @@ const CadastroCliente = () => {
                     "Accept": "application/json",
                     "Content-Type": "application/json"
                 }
-            }).then(function (response) {
-                window.location.href = "/listagemCliente"
-            }).catch(function (error) {
+            }).then(function(response){
+                if(response.data.success == false){
+                    console.log("Error");
+                    console.log(response.data.error);
+                    alert("erro ao cadastrar, olhar o console")
+                }
+                else{
+                    window.location.href = "/listagemCliente";
+                }
+                
+            }).catch(function(error){
                 console.log(error);
-                console.log(dados);
             });
 
     }
@@ -151,6 +158,17 @@ const CadastroCliente = () => {
                                     <label htmlFor="cpf" className='form-label'>CPF</label>
                                     <input type="cpf"
                                         name="cpf"
+                                        className='form-control'
+                                        onChange={handleState}
+                                        required
+                                    />
+                                    
+                                </div>
+
+                                <div className='col-6'>
+                                    <label htmlFor="dataNascimento" className='form-label'>Data de Nascimento</label>
+                                    <input type="date"
+                                        name="dataNascimento"
                                         className='form-control'
                                         onChange={handleState}
                                         required

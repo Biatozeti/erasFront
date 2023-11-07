@@ -1,4 +1,4 @@
-import React, {Component, useState, ChangeEvent, FormEvent, useEffect}from 'react';
+import React, {Component, useState, ChangeEvent, FormEvent, useEffect} from 'react';
 import styles from "../App.module.css"
 import { CadastroClienteInterface } from '../Interfaces/CadastroClienteInterface';
 import axios from 'axios';
@@ -103,15 +103,15 @@ const ListagemCliente = () => {
                                         <th>Email</th>
                                         <th>CPF</th>
                                         <th>DataNascimento</th>
-                                        <th>Cidade</th>
+                                        {/* <th>Cidade</th> */}
                                         <th>Estado</th>
                                         <th>Pais</th>
-                                        <th>Rua</th>
-                                        <th>Numero</th>
-                                        <th>Bairro</th>
-                                        <th>Cep</th>
-                                        <th>Complemento</th>
-                                        <th>Senha</th>
+                                        {/* <th>Rua</th> */}
+                                        {/* <th>Numero</th> */}
+                                        {/* <th>Bairro</th> */}
+                                        {/* <th>Cep</th> */}
+                                        {/* <th>Complemento</th> */}
+                                        {/* <th>Senha</th> */}
                                         
 
 
@@ -125,15 +125,15 @@ const ListagemCliente = () => {
                                         <td>{cliente.email}</td>
                                         <td>{cliente.cpf}</td>
                                         <td>{cliente.dataNascimento}</td>
-                                        <td>{cliente.cidade}</td>
+                                        {/* <td>{cliente.cidade}</td> */}
                                         <td>{cliente.estado}</td>
                                         <td>{cliente.pais}</td>
-                                        <td>{cliente.rua}</td>
-                                        <td>{cliente.numero}</td>
-                                        <td>{cliente.bairro}</td>
-                                        <td>{cliente.cep}</td>
-                                        <td>{cliente.complemento}</td>
-                                        <td>{cliente.senha}</td>
+                                        {/* <td>{cliente.rua}</td> */}
+                                        {/* <td>{cliente.numero}</td> */}
+                                        {/* <td>{cliente.bairro}</td> */}
+                                        {/* <td>{cliente.cep}</td> */}
+                                        {/* <td>{cliente.complemento}</td> */}
+                                        {/* <td>{cliente.senha}</td> */}
                   
 
                                         <td>

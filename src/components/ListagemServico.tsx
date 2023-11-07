@@ -5,50 +5,46 @@ import axios from 'axios';
 
 const ListagemServico = () => {
 
-    const [usuarios, setServico] = useState<CadastroServicoInterface[]>([]);
+    const [servicos, setServicos] = useState<CadastroServicoInterface[]>([]);
     const [pesquisa, setPesquisa] = useState<string>('');
     const [error, setError] = useState("");
 
-    const handleState = (e: ChangeEvent<HTMLInputElement>)=>{
-        if(e.target.name === "pesquisaPorNome1"){
+    const hadleState =(e: ChangeEvent<HTMLInputElement>)=>{
+        if(e.target.name === "pesquisa"){
             setPesquisa(e.target.value);
         }
-
-
     }
+
     const buscar = (e:FormEvent)=>{
         e.preventDefault();
 
         async function fetchData(){
-
             try{
-                const response = await axios.post('http://127.0.0.1:8000/api/servico/nome',
+                const response = await axios.post('http://127.0.0.1:8000/api/nome1',
                 {nome:pesquisa},
                 {
+                    headers:{
+                        "Accept":"application/json",
+                        "content-Type":"aplication/json"
+                    }
+                }).then(function(response){
+                    setServicos(response.data.data);
+                }).catch(function(error){
+                    console.log(error);
+                });
 
-                headers:{
-                    "Accept":"application/json",
-                    "content-Type":"aplication/json"
-                }
-               }).then(function(response){
-                console.log(response.data)
-                setServico(response.data.data);
-               }).catch(function(error){
-                console.log(error);
-               });
             }catch(error){
                 console.log(error);
             }
         }
         fetchData();
     }
-
     useEffect(() =>{
         async function fetchData(){
             try{
                 const response = await axios.get('http://127.0.0.1:8000/api/servico/retornarTodes');
-                setServico(response.data.data);
-               
+                setServicos(response.data.data);
+                
 
             }catch(error){
                 setError("Ocorreu um erro");
@@ -69,15 +65,15 @@ const ListagemServico = () => {
                         <div className='card'>
                             <div className='card-body'>
                                 <h5 className='card-title'>Pesquisar</h5>
-                                <form onSubmit={buscar} className="row"  >
+                                <form onSubmit={buscar}className='row'>
                                     <div className='col-10'>
-                                        <input type="text" name='pesquisaPorNome1'
-                                        className='form-control' onChange={handleState}/>
+                                        <input type="text" name='pesquisa' className='form-control' onChange={hadleState}/>
                                     </div>
+                                    
                                     <div className='col-1'>
-                                        <button type='submit' className='btn btn-success'>Pesquisar</button>
-
-                                    </div>
+                                        <button type='submit'
+                                         className='btn btn-success'>Pesquisar</button>
+                                     </div>
                                 </form>
                             </div>
                         </div>
@@ -86,26 +82,26 @@ const ListagemServico = () => {
                     <div className='card'>
                         <div className='card-body'>
                             <h5 className='card-title'>
-                                Listagem de Servico
+                                Listagem de Serviços
                             </h5>
-                            <table className='table table-hover'>
+                            <table className='table table-hover table-bordered border-dark border border-success p-2 mb-2 border-opacity-25'>
                                 <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Nome</th>
-                                        <th>Descricao</th>
-                                        <th>Duracao</th>
-                                        <th>Preco</th>
+                                        <th>Descrição</th>
+                                        <th>Duração</th>
+                                        <th>Preço</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {usuarios.map(servico =>(
-                                    <tr key={servico.id}>
-                                        <td>{servico.id}</td>
-                                        <td>{servico.nome}</td>
-                                        <td>{servico.descricao}</td>
-                                        <td>{servico.duracao}</td>
-                                        <td>{servico.preco}</td>
+                                    {servicos.map(servicos =>(
+                                    <tr key={servicos.id}>
+                                        <td>{servicos.id}</td>
+                                        <td>{servicos.nome}</td>
+                                        <td>{servicos.descricao}</td>
+                                        <td>{servicos.duracao}</td>
+                                        <td>{servicos.preco}</td>
                                         <td>
                                             <a href="#" className='btn btn-primary btn-sm'>Editar</a>
                                             <a href="#" className='btn btn-danger btn-sm'>Excluir</a>
