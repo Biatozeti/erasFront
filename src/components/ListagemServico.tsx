@@ -20,7 +20,7 @@ const ListagemServico = () => {
 
         async function fetchData(){
             try{
-                const response = await axios.post('http://127.0.0.1:8000/api/nome1',
+                const response = await axios.post('http://127.0.0.1:8000/api/servico/nome',
                 {nome:pesquisa},
                 {
                     headers:{
@@ -28,7 +28,13 @@ const ListagemServico = () => {
                         "content-Type":"aplication/json"
                     }
                 }).then(function(response){
-                    setServicos(response.data.data);
+                    console.log(response);
+                    if(response.data.status == true){
+                        setServicos(response.data.data);
+                    }
+                    else{
+                        setServicos([]);
+                    }
                 }).catch(function(error){
                     console.log(error);
                 });

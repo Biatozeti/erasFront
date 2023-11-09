@@ -12,6 +12,7 @@ import ListagemProfissional from "../components/ListagemProfissional";
 
 
 
+
 const AppRouter = () => {
     return (
         <BrowserRouter>
@@ -22,6 +23,7 @@ const AppRouter = () => {
             <Route path="listagemCliente" element={<ListagemCliente/>}/>
              <Route path="cadastroProfissional" element={<CadastroProfissional/>}/> 
              <Route path="listagemProfissional" element={<ListagemProfissional/>}/> 
+          
             
           </Routes>
         </BrowserRouter>
