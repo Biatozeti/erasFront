@@ -2,8 +2,8 @@ import React, {Component, useState, ChangeEvent, FormEvent, useEffect}from 'reac
 import styles from "../App.module.css"
 import { CadastroProfissionalInterface } from '../Interfaces/CadastroProfissionalInterface';
 import axios from 'axios';
-import Header from './Header';
-import Footer from './Footer';
+
+import { Link } from 'react-router-dom';
 
 
 const Listagemprofissionals = () => {
@@ -38,7 +38,7 @@ const Listagemprofissionals = () => {
                     else{
                         setProfissionals([]);
                     }
-                    setProfissionals(response.data.data);
+                   
                 }).catch(function(error){
                     console.log(error);
                 });
@@ -105,9 +105,9 @@ const Listagemprofissionals = () => {
                                         <th>celular</th>
                                         <th>email</th>
                                         <th>cpf</th>
-                                        <th>dataNascimento</th>
+                                        {/* <th>dataNascimento</th> */}
                                         <th>cidade</th>
-                                        <th>estado</th>
+                                        {/* <th>estado</th> */}
                                         {/* <th>pais</th> */}
                                         {/* <th>rua</th> */}
                                         {/* <th>numero</th> */}
@@ -128,9 +128,9 @@ const Listagemprofissionals = () => {
                                         <td>{profissionals.celular}</td>
                                         <td>{profissionals.email}</td>
                                         <td>{profissionals.cpf}</td>
-                                        <td>{profissionals.dataNascimento}</td>
+                                        {/* <td>{profissionals.dataNascimento}</td> */}
                                         <td>{profissionals.cidade}</td>
-                                        <td>{profissionals.estado}</td>
+                                        {/* <td>{profissionals.estado}</td> */}
                                         {/* <td>{profissionals.pais}</td> */}
                                         {/* <td>{profissionals.rua}</td> */}
                                         {/* <td>{profissionals.numero}</td> */}
@@ -139,7 +139,7 @@ const Listagemprofissionals = () => {
                                         {/* <td>{profissionals.complemento}</td> */}
                                         {/* <td>{profissionals.senha}</td> */}
                                         <td>
-                                            <a href="#" className='btn btn-primary btn-sm'>Editar</a>
+                                        <Link to={"/editarProfissional/" + profissionals.id} className='btn btn-primary btn-sm'>Editar</Link>
                                             <a href="#" className='btn btn-danger btn-sm'>Excluir</a>
                                         </td>
                                     </tr>

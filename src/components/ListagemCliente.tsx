@@ -18,10 +18,10 @@ const ListagemCliente = () => {
 
     const buscar = (e:FormEvent)=>{
         e.preventDefault();
-
+        console.log(pesquisa);
         async function fetchData(){
             try{
-                const response = await axios.post('http://127.0.0.1:8000/api/nome',
+                const response = await axios.post('http://127.0.0.1:8000/api/cliente/nome2',
                 {nome:pesquisa},
                 {
                     headers:{
@@ -29,7 +29,13 @@ const ListagemCliente = () => {
                         "content-Type":"aplication/json"
                     }
                 }).then(function(response){
-                    setClientes(response.data.data);
+                    console.log(response);
+                    if(response.data.status == true){
+                        setClientes(response.data.data);
+                    }
+                    else{
+                        setClientes([]);
+                    }
                 }).catch(function(error){
                     console.log(error);
                 });
@@ -43,7 +49,7 @@ const ListagemCliente = () => {
     useEffect(() =>{
         async function fetchData(){
             try{
-                const response = await axios.get('http://127.0.0.1:8000/api/cliente/retornarTodos/');
+                const response = await axios.get('http://127.0.0.1:8000/api/cliente/retornarTodes');
                 setClientes(response.data.data);
                 
 
