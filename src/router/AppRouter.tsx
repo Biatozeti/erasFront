@@ -27,9 +27,7 @@ const AppRouter = () => {
              <Route path="listagemProfissional" element={<ListagemProfissional/>}/> 
              <Route path="editarClientes/:id" element={<EditarClientes/>}/>
              <Route path="editarServico/:id" element={<EditarServico/>}/>
-             <Route path="editarProfissional/id" element={<EditarProfissional />}/>
-          
-            
+<             Route path="editarProfissional/:id"   element={<EditarProfissional/>}/>      
           </Routes>
         </BrowserRouter>
 

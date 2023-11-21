@@ -121,25 +121,25 @@ const Listagemprofissionals = () => {
                                     
                                 </thead>
                                 <tbody>
-                                    {profissionals.map(profissionals =>(
-                                    <tr key={profissionals.id}>
-                                        {/* <td>{profissionals.id}</td> */}
-                                        <td>{profissionals.nome}</td>
-                                        <td>{profissionals.celular}</td>
-                                        <td>{profissionals.email}</td>
-                                        <td>{profissionals.cpf}</td>
-                                        {/* <td>{profissionals.dataNascimento}</td> */}
-                                        <td>{profissionals.cidade}</td>
-                                        {/* <td>{profissionals.estado}</td> */}
-                                        {/* <td>{profissionals.pais}</td> */}
-                                        {/* <td>{profissionals.rua}</td> */}
-                                        {/* <td>{profissionals.numero}</td> */}
-                                        {/* <td>{profissionals.bairro}</td> */}
-                                        {/* <td>{profissionals.cep}</td> */}
-                                        {/* <td>{profissionals.complemento}</td> */}
-                                        {/* <td>{profissionals.senha}</td> */}
+                                    {profissionals.map(profissional =>(
+                                    <tr key={profissional.id}>
+                                        {/* <td>{profissional.id}</td> */}
+                                        <td>{profissional.nome}</td>
+                                        <td>{profissional.celular}</td>
+                                        <td>{profissional.email}</td>
+                                        <td>{profissional.cpf}</td>
+                                        {/* <td>{profissional.dataNascimento}</td> */}
+                                        <td>{profissional.cidade}</td>
+                                        {/* <td>{profissional.estado}</td> */}
+                                        {/* <td>{profissional.pais}</td> */}
+                                        {/* <td>{profissional.rua}</td> */}
+                                        {/* <td>{profissional.numero}</td> */}
+                                        {/* <td>{profissional.bairro}</td> */}
+                                        {/* <td>{profissional.cep}</td> */}
+                                        {/* <td>{profissional.complemento}</td> */}
+                                        {/* <td>{profissional.senha}</td> */}
                                         <td>
-                                        <Link to={"/editarProfissional/" + profissionals.id} className='btn btn-primary btn-sm'>Editar</Link>
+                                        <Link to={"/editarProfissional/" + profissional.id} className='btn btn-primary btn-sm'>Editar</Link>
                                             <a href="#" className='btn btn-danger btn-sm'>Excluir</a>
                                         </td>
                                     </tr>
