@@ -90,7 +90,7 @@ const EditarClientes = () => {
                 setNumero(response.data.data.numero);
                 setBairro(response.data.data.bairro);
                 setCep(response.data.data.cep);
-                setComplemento(response.data.data.complememento);
+                setComplemento(response.data.data.complemento);
                 setSenha(response.data.data.senha);
 
             } catch (error) {
@@ -141,7 +141,7 @@ const EditarClientes = () => {
         if (e.target.name === "cep") {
             setCep(e.target.value);
         }
-        if (e.target.name === "complememento") {
+        if (e.target.name === "complemento") {
             setComplemento(e.target.value);
         }
         if (e.target.name === "senha") {
@@ -221,7 +221,7 @@ const EditarClientes = () => {
 
                                 <div className='col-6'>
                                     <label htmlFor="complemento" className='form-label'>Complemento</label>
-                                    <input type="text" name='complememnto' className='form-control' required onChange={handleState} value={complemento} />
+                                    <input type="text" name='complemento' className='form-control' required onChange={handleState} value={complemento} />
                                 </div>
 
                                 <div className='col-6'>

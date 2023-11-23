@@ -192,7 +192,7 @@ const CadastroCliente = () => {
 
                             <div className='col-6'>
                                 <label htmlFor="complemento" className='form-label'>Complemento</label>
-                                <input type="text" name='complememnto' className='form-control' required onChange={handleState}/>
+                                <input type="text" name='complemento' className='form-control' required onChange={handleState}/>
                             </div>
 
                             <div className='col-6'>

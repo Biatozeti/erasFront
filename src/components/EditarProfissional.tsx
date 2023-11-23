@@ -78,7 +78,7 @@ const EditarProfissional = () => {
         async function fetchData() {
             try {
                 const response = await axios.get("http://127.0.0.1:8000/api/Profissional/find/" + parametro.id)
-               // console.log(response)
+                console.log(response)
                 setId(response.data.data.id);
                 setNome(response.data.data.nome);
                 setCelular(response.data.data.Celular);
@@ -103,9 +103,12 @@ const EditarProfissional = () => {
                 console.log(error);
 
             }
-        }
+        }  
         fetchData();
 
+      
+
+    
     }, []);
 
 
@@ -156,7 +159,7 @@ const EditarProfissional = () => {
             setSalario(e.target.value);
         }
 
-
+  
         }
         return (
             <div>
