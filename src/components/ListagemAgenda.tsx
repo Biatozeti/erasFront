@@ -10,7 +10,7 @@ const ListagemAgenda = () => {
     const [agenda, setAgenda] = useState<AgendaInterfaces[]>([]);
     const [profissional, setProfissional] = useState<CadastroProfissionalInterface[]>([]);
     const [pesquisa, setPesquisa] = useState<string>('');
-    // const[profissional, setProfissional] = useState<string>('');
+    //const[profissional, setProfissional] = useState<string>('');
     const [error, setError] = useState("");
    
     const hadleStateSelect = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +24,7 @@ const ListagemAgenda = () => {
             try {
                 console.log(profissional)
                 console.log(pesquisa)
-                const response = await axios.post('http://127.0.0.1:8000/api/procurarAgenda',
+                const response = await axios.post('http://127.0.0.1:8000/api/cadastroAgenda',
                     {
                         profissional_id: profissional,
                         data_hora: pesquisa

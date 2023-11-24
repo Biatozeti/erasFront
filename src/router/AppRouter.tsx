@@ -25,7 +25,7 @@ const AppRouter = () => {
             <Route path="cadastroServico" element={<CadastroServico/>}/>
             <Route path="listagemServico" element={<ListagemServico/>}/>
             <Route path="cadastroCliente" element={<CadastroCliente/>}/>
-            <Route path="listagemClientes" element={<ListagemClientes/>}/>
+            <Route path="/listagemClientes" element={<ListagemClientes/>}/>
              <Route path="cadastroProfissional" element={<CadastroProfissional/>}/> 
              <Route path="listagemProfissional" element={<ListagemProfissional/>}/> 
              <Route path="editarClientes/:id" element={<EditarClientes/>}/>

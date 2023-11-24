@@ -4,14 +4,17 @@ import Footer from './FooterRecuperarSenha';
 import styles from '../App.module.css'
 import axios from 'axios';
 
-Const RecuperarSenhaCliente = ()=>{
+const RecuperarSenha = () => {
 
-    const[cpf, setCpf] = useState<string>("");
-    const[email, setEmail] = useState<string>("");
-    const[senha, setSenha] = useState<string>();
+    const [cpf, setCpf] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [senha, setSenha] = useState<string>();
+   
 
+    
 
-    const RecuperarSenha = (e:FormEvent) => {
+    const RecuperarSenha = (e: FormEvent) => {
+
         e.preventDefault();
 
         const dados ={
@@ -21,13 +24,14 @@ Const RecuperarSenhaCliente = ()=>{
             
             
         }
-        axios.post('http://127.0.0.1:8000/api/esqueciSenha', dados,
+
+        axios.post('http://127.0.0.1:8000/api/esqueciSenhaCliente', dados,
         {
             headers:{
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             }
-            
+
         }).then(function(response){
             if(response.data.success == false){
                 console.log("Error");
@@ -109,5 +113,4 @@ Const RecuperarSenhaCliente = ()=>{
     );
 }
 
-export default RecuperarSenhaCliente;
-    
+export default RecuperarSenha;
