@@ -5,16 +5,29 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { CadastroProfissionalInterface } from '../Interfaces/CadastroProfissionalInterface';
+import Header from './Header';
 
 const ListagemAgenda = () => {
-    const [agenda, setAgenda] = useState<AgendaInterfaces[]>([]);
-    const [profissional, setProfissional] = useState<CadastroProfissionalInterface[]>([]);
+
+    const [agendas, setAgendas] = useState<AgendaInterfaces[]>([]);
+    const [profissionais, setProfissionais] = useState<CadastroProfissionalInterface[]>([]);
+
     const [pesquisa, setPesquisa] = useState<string>('');
-    //const[profissional, setProfissional] = useState<string>('');
+    const [profissional, setProfissional] = useState<string>('');
+
     const [error, setError] = useState("");
-   
-    const hadleStateSelect = (e: ChangeEvent<HTMLInputElement>) => {
-        setPesquisa(e.target.value);
+
+    const hadleState = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.name === "pesquisa") {
+            setPesquisa(e.target.value);
+        }
+    }
+
+    const hadleStateSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+        //console.log(e.target)
+        //if (e.target.name === "selectProfissional") {
+            setProfissional(e.target.value);
+        //}
     }
 
     const buscar = (e: FormEvent) => {
@@ -24,22 +37,28 @@ const ListagemAgenda = () => {
             try {
                 console.log(profissional)
                 console.log(pesquisa)
-                const response = await axios.post('http://127.0.0.1:8000/api/cadastroAgenda',
+                const response = await axios.post('http://127.0.0.1:8000/api/procurarAgenda',
                     {
                         profissional_id: profissional,
                         data_hora: pesquisa
-                    }
-                ).then(function (response) {
-                    console.log(response);
-                    if (response.data.status == true) {
-                        setAgenda(response.data.data);
-                    }
-                    else {
-                        setAgenda([]);
-                    }
-                }).catch(function (error) {
-                    console.log(error);
-                });
+                    },
+                    {
+                        headers: {
+                            "Accept": "application/json",
+                            "content-Type": "aplication/json"
+                        }
+                    }).then(function (response) {
+                        console.log(response);
+                        if (response.data.status == true) {
+                            setAgendas(response.data.data);
+                        }
+                        else {
+                            setAgendas([]);
+                        }
+
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
 
             } catch (error) {
                 console.log(error);
@@ -48,15 +67,87 @@ const ListagemAgenda = () => {
         fetchData();
     }
 
+    const excluir = (id: number)=>{
+        async function fetchData(){
+            try{
+                const response = await axios.delete('http://127.0.0.1:8000/api/excluirAgenda/'+ id);
+                if(response.data.status === true){
+
+                    const response = await axios.get('http://127.0.0.1:8000/api/retornarTodosAgenda/');
+                    setAgendas(response.data.data);
+                   
+                }
+                else{
+                    console.log(error);
+                }
+            }catch(error){
+                setError("ocorreu um erro");
+                console.log(error);
+            }
+
+        }
+        fetchData();
+    }
+
+    // const confirmacao = (id: number) => {
+    //     Swal.fire({
+    //         title: "Tem certeza que quer excluir?",
+    //         text: "Você não vai poder reverter isso depois!",
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#3085d6",
+    //         cancelButtonColor: "#d33",
+    //         confirmButtonText: "Sim, excluir"
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+
+    //             excluir(id);
+
+    //             Swal.fire({
+    //                 title: "Excluido com sucesso!",
+    //                 text: "seu cadastro foi excluido.",
+    //                 icon: "success"
+
+
+    //             });
+
+    //         }
+
+    //     });
+
+    // }
+
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/cliente/retornarTodes');
-                setAgenda(response.data.data);
+                const response = await axios.get('http://127.0.0.1:8000/api/Profissional/retornarTodos');
+                setProfissionais(response.data.data);
+
+
             } catch (error) {
                 setError("Ocorreu um erro");
                 console.log(error);
+
             }
+
+        }
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get('http://127.0.0.1:8000/api/retornarTodosAgenda/');
+                setAgendas(response.data.data);
+
+
+            } catch (error) {
+                setError("Ocorreu um erro");
+                console.log(error);
+
+            }
+
         }
 
         fetchData();
@@ -64,6 +155,35 @@ const ListagemAgenda = () => {
 
     return (
         <div>
+             <nav className=" bg-warning">
+                <ul className="nav nav-tabs">
+                    <li className="nav-item dropdown btn-warning">
+                        <a className="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Listagens</a>
+                        <ul className="dropdown-menu">
+                            <li><Link to={"/ListagemProfissional"} className="dropdown-item" >Listagem Profissional</Link></li>
+                            <li><Link to={"/ListagemClientes"} className="dropdown-item">Listagem Cliente</Link></li>
+                            <li><Link to={"/ListagemServico"} className="dropdown-item">Listagem Serviço</Link></li>
+
+
+                        </ul>
+                    </li>
+
+                    <li className="nav-item dropdown btn-warning">
+                        <a className="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Cadastros</a>
+                        <ul className="dropdown-menu">
+                            <li><Link to={"/CadastroServico"} className="dropdown-item" >Cadastro Serviço</Link></li>
+                            <li><Link to={"/cadastroProfissional"} className="dropdown-item">Cadastro Profissional</Link></li>
+                            <li><Link to={"/CadastroCliente"} className="dropdown-item">Cadastro Cliente</Link></li>
+
+                        </ul>
+                    </li>
+
+
+
+                </ul>
+
+            </nav>
+            <Header />
             <main className={styles.main}>
                 <div className='container'>
 
@@ -73,9 +193,9 @@ const ListagemAgenda = () => {
                                 <h5 className='card-title'>Pesquisar</h5>
                                 <form onSubmit={buscar} className='row'>
                                     <div className='col-5'>
-                                        <select name="selectProfissional"  >
+                                        <select name="selectProfissional" value={profissional} onChange={hadleStateSelect} >
                                             <option selected value="0">Selecione um Profissional</option>
-                                            {profissional.map(profissional => (
+                                            {profissionais.map(profissional => (
                                                 <option value={profissional.id}>{profissional.nome}</option>
                                             ))}
 
@@ -83,7 +203,7 @@ const ListagemAgenda = () => {
 
                                     </div>
                                     <div className='col-5'>
-                                        <input type="text" name='pesquisa' className='form-control' />
+                                        <input type="text" name='pesquisa' className='form-control' onChange={hadleState} />
                                     </div>
 
                                     <div className='col-1'>
@@ -106,16 +226,20 @@ const ListagemAgenda = () => {
                                         {/* <th>ID</th> */}
                                         <th>profisional_id</th>
                                         <th>data_hora</th>
+                                        <th>Ações</th>
 
                                     </tr>
 
 
                                 </thead>
                                 <tbody>
-                                    {agenda.map(agenda => (
-                                        <tr key={agenda.id}>
-                                            <td>{agenda.profissional_id}</td>
-                                            <td>{agenda.data_hora}</td>
+                                    {agendas.map(agendas => (
+                                        <tr key={agendas.id}>
+                                            <td>{agendas.profissional_id}</td>
+                                            <td>{agendas.data_hora}</td>
+                                            <td>
+                                            <button onClick={()=> excluir(agendas.id)} className='btn btn-danger btn-sm'>Excluir</button>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>

@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import styles from '../App.module.css'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const CadastroProfissional = () => {
 
@@ -22,11 +23,46 @@ const CadastroProfissional = () => {
     const [senha, setSenha] = useState<string>("");
     const [salario, setSalario] = useState<string>("");
 
+    //erros
+
+    const [nomeErro, setNomeErro] = useState<string>("");
+    const [celularErro, setCelularErro] = useState<string>("");
+    const [emailErro, setEmailErro] = useState<string>("");
+    const [cpfErro, setCpfErro] = useState<string>("");
+    const [dataNascimentoErro, setDataNascimentoErro] = useState<string>("");
+    const [cidadeErro, setCidadeErro] = useState<string>("");
+    const [estadoErro, setEstadoErro] = useState<string>("");
+    const [paisErro, setPaisErro] = useState<string>("");
+    const [ruaErro, setRuaErro] = useState<string>("");
+    const [numeroErro, setNumeroErro] = useState<string>("");
+    const [bairroErro, setBairroErro] = useState<string>("");
+    const [cepErro, setCepErro] = useState<string>("");
+    const [complementoErro, setComplementoErro] = useState<string>("");
+    const [senhaErro, setSenhaErro] = useState<string>("");
+    const [salarioErro, setSalarioErro] = useState<string>("");
+
+
  
+   
 
    
 
     const CadastroProfissional = (e: FormEvent) => {
+        setNomeErro("")
+        setCelularErro("")
+        setEmailErro("")
+        setCpfErro("")
+        setDataNascimentoErro("")
+        setCidadeErro("")
+        setEstadoErro("")
+        setPaisErro("")
+        setRuaErro("")
+        setNumeroErro("")
+        setBairroErro("")
+        setCepErro("")
+        setComplementoErro("")
+        setSenhaErro("")
+        setSalario("")
 
         e.preventDefault();
 
@@ -57,6 +93,55 @@ const CadastroProfissional = () => {
             }
 
         }).then(function(response){
+            if (response.data.success === false) {
+                if ('nome' in response.data.error) {
+                    setNomeErro(response.data.error.nome[0]);
+                }
+                if ('celular' in response.data.error) {
+                    setCelularErro(response.data.error.celular[0]);
+                }
+                if ('email' in response.data.error) {
+                    setEmailErro(response.data.error.email[0]);
+                }
+                if ('cpf' in response.data.error) {
+                    setCpfErro(response.data.error.cpf[0]);
+                } 
+                if ('dataNascimento' in response.data.error) {
+                    setDataNascimentoErro(response.data.error.dataNascimento[0]);
+                }
+                if ('cidade' in response.data.error) {
+                    setCidadeErro(response.data.error.cidade[0]);
+                }
+                if ('estado' in response.data.error) {
+                    setEstadoErro(response.data.error.estado[0]);
+                }
+                if ('pais' in response.data.error) {
+                    setPaisErro(response.data.error.pais[0]);
+                }
+                if ('rua' in response.data.error) {
+                    setRuaErro(response.data.error.rua[0]);
+                }
+                if ('numero' in response.data.error) {
+                    setNumeroErro(response.data.error.numero[0]);
+                }
+                if ('bairro' in response.data.error) {
+                    setBairroErro(response.data.error.bairro[0]);
+                }
+                if ('cep' in response.data.error) {
+                    setCepErro(response.data.error.cep[0]);
+                }
+                if ('complemento' in response.data.error) {
+                    setComplementoErro(response.data.error.complemento[0]);
+                }
+                if ('senha' in response.data.error) {
+                    setSenhaErro(response.data.error.senha[0]);
+                }
+                if ('salario' in response.data.error) {
+                    setSalarioErro(response.data.error.salario[0]);
+                }
+            }
+
+
             if(response.data.success == false){
                 console.log("Error");
                 console.log(response.data.error);
@@ -120,12 +205,59 @@ const CadastroProfissional = () => {
        
        
     }
+
+    const findCep = (e: FormEvent) => {
+        e.preventDefault();
+        console.log(cep)
+        fetch('https://viacep.com.br/ws/'+cep+'/json/',
+        {
+            method: 'GET'
+        }).then(response => response.json())
+        .then(
+            data => {
+                setCidade(data.localidade);
+               // setCep(data.cep);
+                setRua(data.logradouro);
+                setBairro(data.bairro);
+
+
+                setEstado(data.uf);       
+            }
+        ).catch(function(error){
+            console.log(error);
+        });
+        
+    }
     
       
 
 
     return(
         <div>
+            <nav className=" bg-black">
+                <ul className="nav nav-tabs">
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Cadastros</a>
+                        <ul className="dropdown-menu">
+                            <li><Link to={"/CadastroCliente"} className="dropdown-item" >Cadastro Cliente</Link></li>
+                            <li><Link to={"/CadastroServico"} className="dropdown-item">Cadastro Serviço</Link></li>
+                           
+                        </ul>
+                    </li>
+                    <li className="nav-item dropdown btn-white">
+                        <a className="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Listagens</a>
+                        <ul className="dropdown-menu">
+                            <li><Link to={"/ListagemServico"} className="dropdown-item" >Listagem Serviço</Link></li>
+                            <li><Link to={"/ListagemClientes"} className="dropdown-item">Listagem Cliente</Link></li>
+                            <li><Link to={"/ListagemProfissional"} className="dropdown-item">Listagem Profissional</Link></li>
+                            <li><Link to={"/ListagemAgenda"} className="dropdown-item">Listagem Agenda</Link></li>
+
+                           
+                        </ul>
+                    </li>
+
+                </ul>
+            </nav>
            <Header />
            <main className={styles.main}>
             <div className='container'>
@@ -152,22 +284,26 @@ const CadastroProfissional = () => {
 
                             <div className='col-6'>
                                 <label htmlFor="cpf" className='form-label'>CPF</label>
-                                <input type="text" name='cpf' className='form-control' required onChange={handleState}/>
+                                <input type="text" name='cpf' className='form-control' required onChange={handleState} />
                             </div>
 
                             <div className='col-6'>
                                 <label htmlFor="dataNascimento" className='form-label'>Data Nascimento</label>
                                 <input type="date" name='dataNascimento' className='form-control' required onChange={handleState}/>
                             </div>
+                            <div className='col-6'>
+                                <label htmlFor="cep" className='form-label'>CEP</label>
+                                <input type="text" name='cep' className='form-control' required onChange={handleState}onBlur={findCep}/>
+                            </div>
 
                             <div className='col-6'>
                                 <label htmlFor="cidade" className='form-label'>Cidade</label>
-                                <input type="text" name='cidade' className='form-control' required onChange={handleState}/>
+                                <input type="text" name='cidade' className='form-control' required onChange={handleState}value={cidade}/>
                             </div>
 
                             <div className='col-6'>
                                 <label htmlFor="estado" className='form-label'>Estado</label>
-                                <input type="text" name='estado' className='form-control' required onChange={handleState}/>
+                                <input type="text" name='estado' className='form-control' required onChange={handleState}value={estado}/>
                             </div>
 
                             <div className='col-6'>
@@ -177,7 +313,7 @@ const CadastroProfissional = () => {
 
                             <div className='col-6'>
                                 <label htmlFor="rua" className='form-label'>Rua</label>
-                                <input type="text" name='rua' className='form-control' required onChange={handleState}/>
+                                <input type="text" name='rua' className='form-control' required onChange={handleState}value={rua}/>
                             </div>
 
                             <div className='col-6'>
@@ -187,13 +323,10 @@ const CadastroProfissional = () => {
 
                             <div className='col-6'>
                                 <label htmlFor="bairro" className='form-label'>Bairro</label>
-                                <input type="text" name='bairro' className='form-control' required onChange={handleState}/>
+                                <input type="text" name='bairro' className='form-control' required onChange={handleState}value={bairro}/>
                             </div>
 
-                            <div className='col-6'>
-                                <label htmlFor="cep" className='form-label'>CEP</label>
-                                <input type="text" name='cep' className='form-control' required onChange={handleState}/>
-                            </div>
+                          
 
                             <div className='col-6'>
                                 <label htmlFor="complemento" className='form-label'>Complemento</label>

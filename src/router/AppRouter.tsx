@@ -33,8 +33,8 @@ const AppRouter = () => {
              <Route path="editarServico/:id" element={<EditarServico/>}/>
             <Route path="editarProfissional/:id"   element={<EditarProfissional/>}/>   
             <Route path="/listagemAgenda" element={<ListagemAgenda/>}/> 
-            <Route path="recuperarSenha"element={<RecuperarSenhaCliente/>}/>
-            <Route path="recuperarSenha"element={<RecuperarSenhaProfissional/>}/>
+            <Route path="/recuperarSenhaCliente"element={<RecuperarSenhaCliente/>}/>
+            <Route path="/recuperarSenhaProfissional"element={<RecuperarSenhaProfissional/>}/>
 
           </Routes>
         </BrowserRouter>
