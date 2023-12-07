@@ -1,7 +1,7 @@
 import React, { Component, useState, ChangeEvent, FormEvent, useEffect } from "react";
 
 import styles from "../App.module.css"
-import Header from "./Header";
+import Header from "./HeaderCliente";
 import Footer from "./Footer";
 import { useParams } from "react-router-dom";
 import axios from "axios";

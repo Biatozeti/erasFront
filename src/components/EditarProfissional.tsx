@@ -1,7 +1,7 @@
 import React, { Component, useState, ChangeEvent, FormEvent, useEffect } from "react";
 
 import styles from "../App.module.css"
-import Header from "./Header";
+import Header from "./HeaderProfissional";
 import Footer from "./Footer";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -26,12 +26,23 @@ const EditarProfissional = () => {
     const [salario, setSalario] = useState<string>();
 
 
+   
+   
+    
+
+
+
+
+
 
     const parametro = useParams();
 
     const Atualizar = (e: FormEvent) => {
+       
+
         e.preventDefault();
 
+        
         const dados = {
             id: id,
             nome: nome,
@@ -174,11 +185,13 @@ const EditarProfissional = () => {
                                     <div className='col-6'>
                                         <label htmlFor="nome" className='form-label'>Nome</label>
                                         <input type="text" name='nome' className='form-control' required onChange={handleState} value={nome} />
+                                
                                     </div>
 
                                     <div className='col-6'>
                                         <label htmlFor="celular" className='form-label'>Celular</label>
                                         <input type="text" name='celular' className='form-control' required onChange={handleState} value={celular} />
+                                        
                                     </div>
 
 
@@ -193,9 +206,9 @@ const EditarProfissional = () => {
                                     </div>
 
                                     <div className='col-6'>
-                                        <label htmlFor="dataNascimento" className='form-label'>DataNascimento</label>
-                                        <input type="text" name='dataNascimento' className='form-control' required onChange={handleState} value={dataNascimento} />
-                                    </div>
+                                    <label htmlFor="dataNascimento" className='form-label'>Data Nascimento</label>
+                                    <input type="date" name='dataNascimento' className='form-control' required onChange={handleState} value={dataNascimento} />
+                                </div>
 
                                     <div className='col-6'>
                                         <label htmlFor="cidade" className='form-label'>Cidade</label>
@@ -237,10 +250,7 @@ const EditarProfissional = () => {
                                         <input type="text" name='complemento' className='form-control' required onChange={handleState} value={complemento} />
                                     </div>
 
-                                    <div className='col-6'>
-                                        <label htmlFor="senha" className='form-label'>Senha</label>
-                                        <input type="text" name='senha' className='form-control' required onChange={handleState} value={senha} />
-                                    </div>
+                                  
 
                                     <div className='col-6'>
                                         <label htmlFor="salario" className='form-label'>Salario</label>

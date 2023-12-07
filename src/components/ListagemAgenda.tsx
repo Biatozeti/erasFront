@@ -1,11 +1,12 @@
 import React, { Component, useState, ChangeEvent, FormEvent, useEffect } from 'react';
-import styles from "../App.module.css"
+import  Styles from '../App.module.css';
 import { AgendaInterfaces } from '../Interfaces/AgendaInterfaces';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { CadastroProfissionalInterface } from '../Interfaces/CadastroProfissionalInterface';
-import Header from './Header';
+import Header from './HeaderServico';
+import Swal from 'sweetalert2';
 
 const ListagemAgenda = () => {
 
@@ -87,41 +88,44 @@ const ListagemAgenda = () => {
 
         }
         fetchData();
-    }
+        
+       
+        }
+    
 
-    // const confirmacao = (id: number) => {
-    //     Swal.fire({
-    //         title: "Tem certeza que quer excluir?",
-    //         text: "Você não vai poder reverter isso depois!",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Sim, excluir"
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
+     const confirmacao = (id: number) => {
+       Swal.fire({
+            title: "Tem certeza que quer excluir?",
+             text: "Você não vai poder reverter isso depois!",
+            icon: "warning",
+            showCancelButton: true,
+             confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+             confirmButtonText: "Sim, excluir"
+        }).then((result) => {
+             if (result.isConfirmed) {
 
-    //             excluir(id);
+                excluir(id);
 
-    //             Swal.fire({
-    //                 title: "Excluido com sucesso!",
-    //                 text: "seu cadastro foi excluido.",
-    //                 icon: "success"
+                 Swal.fire({
+                     title: "Excluido com sucesso!",
+                     text: "seu cadastro foi excluido.",
+                     icon: "success"
 
 
-    //             });
+                 });
 
-    //         }
+             }
 
-    //     });
+         });
 
-    // }
+     }
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await axios.get('http://127.0.0.1:8000/api/Profissional/retornarTodos');
-                setProfissionais(response.data.data);
+                setProfissional(response.data.data);
 
 
             } catch (error) {
@@ -155,10 +159,10 @@ const ListagemAgenda = () => {
 
     return (
         <div>
-             <nav className=" bg-warning">
+             <nav className=" bg-black">
                 <ul className="nav nav-tabs">
-                    <li className="nav-item dropdown btn-warning">
-                        <a className="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Listagens</a>
+                    <li className="nav-item dropdown btn-pink">
+                        <a className="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Listagens</a>
                         <ul className="dropdown-menu">
                             <li><Link to={"/ListagemProfissional"} className="dropdown-item" >Listagem Profissional</Link></li>
                             <li><Link to={"/ListagemClientes"} className="dropdown-item">Listagem Cliente</Link></li>
@@ -168,8 +172,8 @@ const ListagemAgenda = () => {
                         </ul>
                     </li>
 
-                    <li className="nav-item dropdown btn-warning">
-                        <a className="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Cadastros</a>
+                    <li className="nav-item dropdown btn-black">
+                        <a className="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Cadastros</a>
                         <ul className="dropdown-menu">
                             <li><Link to={"/CadastroServico"} className="dropdown-item" >Cadastro Serviço</Link></li>
                             <li><Link to={"/cadastroProfissional"} className="dropdown-item">Cadastro Profissional</Link></li>
@@ -184,7 +188,7 @@ const ListagemAgenda = () => {
 
             </nav>
             <Header />
-            <main className={styles.main}>
+            <main className={Styles.main}>
                 <div className='container'>
 
                     <div className='col-md mb-3'>
@@ -238,7 +242,8 @@ const ListagemAgenda = () => {
                                             <td>{agendas.profissional_id}</td>
                                             <td>{agendas.data_hora}</td>
                                             <td>
-                                            <button onClick={()=> excluir(agendas.id)} className='btn btn-danger btn-sm'>Excluir</button>
+                                          
+                                            <button onClick={()=> confirmacao(agendas.id)} className='btn btn-danger btn-sm'>Excluir</button>
                                             </td>
                                         </tr>
                                     ))}

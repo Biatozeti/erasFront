@@ -3,6 +3,8 @@ import styles from "../App.module.css"
 import { CadastroClienteInterface } from '../Interfaces/CadastroClienteInterface';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Header from './HeaderCliente';
+import Swal from 'sweetalert2';
 
 const ListagemCliente = () => {
 
@@ -16,6 +18,15 @@ const ListagemCliente = () => {
         }
     }
 
+
+
+
+
+
+
+
+
+    
     const buscar = (e:FormEvent)=>{
         e.preventDefault();
         console.log(pesquisa);
@@ -67,6 +78,34 @@ const ListagemCliente = () => {
         }fetchData();
     }
 
+    const confirmacao = (id: number) => {
+        Swal.fire({
+             title: "Tem certeza que quer excluir?",
+              text: "Você não vai poder reverter isso depois!",
+             icon: "warning",
+             showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+             cancelButtonColor: "#d33",
+              confirmButtonText: "Sim, excluir"
+         }).then((result) => {
+              if (result.isConfirmed) {
+ 
+                 excluir(id);
+ 
+                  Swal.fire({
+                      title: "Excluido com sucesso!",
+                      text: "seu cadastro foi excluido.",
+                      icon: "success"
+ 
+ 
+                  });
+ 
+              }
+ 
+          });
+ 
+      }
+ 
 
 
 
@@ -114,6 +153,7 @@ const ListagemCliente = () => {
 
                 </ul>
             </nav>
+            <Header/>
             <main className={styles.main}>
                 <div className='container'>
 
@@ -183,7 +223,7 @@ const ListagemCliente = () => {
                                         {/* <td>{clientes.senha}</td> */}
                                         <td>
                                             <Link to={"/editarClientes/"+ clientes.id}  className='btn btn-primary btn-sm'>Editar</Link>
-                                            <button onClick={()=> excluir(clientes.id)} className='btn btn-danger btn-sm'>Excluir</button>
+                                            <button onClick={()=> confirmacao(clientes.id)} className='btn btn-danger btn-sm'>Excluir</button>
                                             <Link to={"/recuperarSenhaCliente" } className='btn btn-warning btn-sm'>Recuperar Senha</Link>                                       </td>
                                     </tr>
                                     ))}

@@ -2,8 +2,9 @@ import React, {Component, useState, ChangeEvent, FormEvent, useEffect}from 'reac
 import styles from "../App.module.css"
 import { CadastroProfissionalInterface } from '../Interfaces/CadastroProfissionalInterface';
 import axios from 'axios';
-
+import Header from './HeaderProfissional';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 const Listagemprofissionals = () => {
@@ -69,6 +70,35 @@ const Listagemprofissionals = () => {
             
         }fetchData();
     }
+    
+    const confirmacao = (id: number) => {
+        Swal.fire({
+             title: "Tem certeza que quer excluir?",
+              text: "Você não vai poder reverter isso depois!",
+             icon: "warning",
+             showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+             cancelButtonColor: "#d33",
+              confirmButtonText: "Sim, excluir"
+         }).then((result) => {
+              if (result.isConfirmed) {
+ 
+                 excluir(id);
+ 
+                  Swal.fire({
+                      title: "Excluido com sucesso!",
+                      text: "seu cadastro foi excluido.",
+                      icon: "success"
+ 
+ 
+                  });
+ 
+              }
+ 
+          });
+ 
+      }
+ 
     useEffect(() =>{
         async function fetchData(){
             try{
@@ -112,6 +142,7 @@ const Listagemprofissionals = () => {
 
                 </ul>
             </nav>
+            <Header/>
             <main className={styles.main}>
            
                 <div className='container'>
@@ -184,7 +215,7 @@ const Listagemprofissionals = () => {
                                         {/* <td>{profissional.senha}</td> */}
                                         <td>
                                         <Link to={"/editarProfissional/" + profissional.id} className='btn btn-primary btn-sm'>Editar</Link>
-                                    <button onClick={()=> excluir(profissional.id)} className='btn btn-danger btn-sm'>Excluir</button>
+                                    <button onClick={()=> confirmacao(profissional.id)} className='btn btn-danger btn-sm'>Excluir</button>
                                     <Link to={"/recuperarSenhaProfissional" } className='btn btn-warning btn-sm'>Recuperar Senha</Link>
                                         </td>
                                     </tr>
